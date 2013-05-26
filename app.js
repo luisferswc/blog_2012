@@ -9,6 +9,7 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , partials = require('express-partials')
+  , count = require('./count')
   , postController = require('./routes/post_controller.js');
 
 var app = express();
