@@ -27,6 +27,8 @@ app.use(partials());
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
   app.use(count.count_nw()); 
+  //app.use(count.getCount);
+  console.log("Visitas: " + count.getCount());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -49,6 +51,11 @@ app.locals.escapeText =  function(text) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+
+
+//var count
+
+app.locals.count= function(){return count.getCount();}
 
 //---------------------
 //app.get('/video', video.video); 
