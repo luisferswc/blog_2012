@@ -261,3 +261,36 @@ exports.destroy = function(req, res, next) {
             res.redirect('/');
         });
 };
+
+//GET /posts/search
+exports.search = function(req, res, next) {
+
+    var string = req.query.searchtxt;
+    var stringBBDD = '%' + string + '%';
+    var format = req.params.format || 'html';
+    format = format.toLowerCase();
+
+    models.Post
+    .findAll({where: ["title like ? OR body like ?", stringBBDD, stringBBDD], order: "updatedAt DESC"})
+    .success(function(posts) {
+        switch (format) {
+            case 'html':
+            case 'htm':
+            res.render('posts/search', { posts: posts, visitas: "visitas", string: string});
+            break;
+            case 'json':
+            res.send(posts);
+            break;
+            case 'xml':
+            res.send(posts_to_xml(posts));
+            break;
+            default:
+            console.log('No se soporta el formato \".'+format+'\".');
+            res.send(406);
+        }
+    })
+    .error(function(error) {
+        console.log("Error: No puedo listar los posts.");
+        res.redirect('/');
+    });
+}; 
