@@ -2,7 +2,7 @@
 
 <article>
 
-<p>
+<p> 
   <b><%= post.title %></b>
   <br />
   <em><%= post.author && post.author.name || 'Sin autor' %></em>
@@ -14,13 +14,15 @@
 
 <p><%- escapeText(post.body) %></p>
 
+<p> Numero de comentarios: <%= comments && comments.length || "Sin comentarios" %> </p>
+
 <% if (session.user && session.user.id == post.authorId) {%>
   <a href="/posts/<%= post.id %>/edit"> Editar </a>
 <% } %>
 
 </article>
 
-<hr />
+<hr /> 
 <%- include ../comments/index.ejs %>
 <hr />
 

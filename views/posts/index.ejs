@@ -14,6 +14,8 @@
      <p>
         <%= posts[i].body.slice(0,300) %> ... 
      </p>
+     
+     <p> No. Comentarios: <%= posts[i].comments && posts[i].comments.length || "Sin comentarios" %> </p>
 
      <footer>
 
