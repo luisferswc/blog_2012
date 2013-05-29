@@ -11,7 +11,8 @@ var express = require('express')
   , sessionController = require('./routes/session_controller.js')
   , postController = require('./routes/post_controller.js')
   , userController = require('./routes/user_controller.js')
-  , commentController = require('./routes/comment_controller.js');
+  , commentController = require('./routes/comment_controller.js')
+  , timeController = require('./timeController.js');;
 
 var util = require('util');
 
@@ -29,6 +30,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser('--Core Blog 2012--'));
   app.use(express.session());
+  app.use(timeController.timeController);
 
   app.use(require('connect-flash')());
 
